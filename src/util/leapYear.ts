@@ -8,3 +8,14 @@ export const isLeapYear = (year: number): boolean => {
   if (year % 100 == 0) return false;
   return year % 4 == 0;
 };
+
+/**
+ * Takes a year number and returns a sentence describing whether it is a leap year.
+ *
+ * @param {number} year The year to identify as leap year
+ */
+const leapYearText = (year: number): string => {
+  return `The year ${year} is ${isLeapYear(year) ? "a" : "no"} leap year.`;
+};
+
+export default leapYearText;

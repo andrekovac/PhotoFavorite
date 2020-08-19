@@ -1,6 +1,6 @@
-import { isLeapYear } from "./leapYear";
+import leapYearText, { isLeapYear } from "./leapYear";
 
-describe('isLeapYear`', () => {
+describe("isLeapYear", () => {
   test("whether it correctly identifies a leap year which is divisible by 4 but not by 100 or 400", () => {
     expect(isLeapYear(2020)).toBe(true);
   });
@@ -15,5 +15,15 @@ describe('isLeapYear`', () => {
 
   test("whether it correclty identifies a non-leap year", () => {
     expect(isLeapYear(2019)).toBe(false);
+  });
+});
+
+describe("leapYearText", () => {
+  test("whether a positive string is displayed", () => {
+    expect(leapYearText(2020)).toBe("The year 2020 is a leap year.");
+  });
+
+  test("whether a negative string is displayed", () => {
+    expect(leapYearText(2019)).toBe("The year 2019 is no leap year.");
   });
 });

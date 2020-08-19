@@ -2,6 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import React from "react";
 
+import leapYearText from './src/util/leapYear';
+
 type Props = {
   backgroundColor?: string;
   title?: string;
@@ -9,7 +11,7 @@ type Props = {
 const Box = ({ backgroundColor = "red", title = "No title" }: Props) => (
   <Wrapper
     backgroundColor={backgroundColor}
-    onPress={() => console.log(`Box with title ${title} was tapped.`)}
+    onPress={() => console.log(`Box with title "${title}" was tapped.`)}
   >
     <Title>{title}</Title>
   </Wrapper>
@@ -18,7 +20,7 @@ const Box = ({ backgroundColor = "red", title = "No title" }: Props) => (
 export default function App() {
   return (
     <Container>
-      <Box backgroundColor={"#ee1d1d"} title={"one"} />
+      <Box backgroundColor={"#ee1d1d"} title={leapYearText(2020)} />
       <Box backgroundColor={"#309930"} title={"two"} />
       <Box backgroundColor={"#3d3dcc"} title={"three"} />
       <StatusBar style="auto" />
