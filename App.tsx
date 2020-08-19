@@ -3,11 +3,14 @@ import styled from "styled-components/native";
 import React from "react";
 
 type Props = {
-  backgroundColor?: string,
-  title?: string,
-}
+  backgroundColor?: string;
+  title?: string;
+};
 const Box = ({ backgroundColor = "red", title = "No title" }: Props) => (
-  <Wrapper backgroundColor={backgroundColor}>
+  <Wrapper
+    backgroundColor={backgroundColor}
+    onPress={() => console.log(`Box with title ${title} was tapped.`)}
+  >
     <Title>{title}</Title>
   </Wrapper>
 );
@@ -15,9 +18,9 @@ const Box = ({ backgroundColor = "red", title = "No title" }: Props) => (
 export default function App() {
   return (
     <Container>
-      <Box backgroundColor={'#ee1d1d'} title={'one'} />
-      <Box backgroundColor={'#309930'} title={'two'} />
-      <Box backgroundColor={'#3d3dcc'} title={'three'} />
+      <Box backgroundColor={"#ee1d1d"} title={"one"} />
+      <Box backgroundColor={"#309930"} title={"two"} />
+      <Box backgroundColor={"#3d3dcc"} title={"three"} />
       <StatusBar style="auto" />
     </Container>
   );
@@ -29,14 +32,13 @@ const Container = styled.View`
 `;
 
 type WrapperProps = { backgroundColor?: string };
-const Wrapper = styled.View<WrapperProps>`
+const Wrapper = styled.TouchableOpacity<WrapperProps>`
   background-color: ${(props) => props.backgroundColor || "blue"};
   border-radius: 5px;
-
   margin: 10px;
-
-
   flex: 0.25;
+
+  /* children */
   justify-content: center;
   align-items: center;
 `;
