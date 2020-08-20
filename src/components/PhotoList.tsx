@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { ActivityIndicator, FlatList } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
 type ItemT = {
   id: string;
@@ -8,8 +13,14 @@ type ItemT = {
   download_url: string;
 };
 
-const Item = ({ download_url }: Pick<ItemT, "download_url">) => (
-  <ItemImage source={{ uri: download_url }} />
+const Item = ({ download_url, author }: Omit<ItemT, "id">) => (
+  <TouchableOpacity
+    onPress={() => {
+      Alert.alert("Artist", author, [{ text: "OK" }], { cancelable: false });
+    }}
+  >
+    <ItemImage source={{ uri: download_url }} />
+  </TouchableOpacity>
 );
 
 const PhotoList = () => {
@@ -26,7 +37,7 @@ const PhotoList = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -35,10 +46,12 @@ const PhotoList = () => {
   }, []);
 
   const renderItem = ({ item }: { item: ItemT }) => (
-    <Item download_url={item.download_url} />
+    <Item download_url={item.download_url} author={item.author} />
   );
 
-  return isLoading ? <ActivityIndicator/> : (
+  return isLoading ? (
+    <ActivityIndicator />
+  ) : (
     <FlatList
       data={data}
       renderItem={renderItem}
