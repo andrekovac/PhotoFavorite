@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 
-import ColoredButtonsScreen from "./src/screens/ColoredButtonsScreen";
+import Pictorio from "./src/screens/Pictorio";
 
 export default function App() {
   return (
     <>
-      <ColoredButtonsScreen />
+      <Pictorio />
       <StatusBar style="auto" />
     </>
   );
