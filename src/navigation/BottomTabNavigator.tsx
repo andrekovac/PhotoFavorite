@@ -6,7 +6,9 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import PhotosScreen from '../screens/PhotosScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 import CounterScreen from '../screens/CounterScreen';
+
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -26,8 +28,15 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Counter"
+        name="Favorites"
         component={TabTwoNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-heart" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Counter"
+        component={CounterScreen}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-clock" color={color} />,
         }}
@@ -64,9 +73,9 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="CounterScreen"
-        component={CounterScreen}
-        options={{ headerTitle: 'Counter' }}
+        name="FavoritesScreen"
+        component={FavoritesScreen}
+        options={{ headerTitle: 'Favorites' }}
       />
     </TabTwoStack.Navigator>
   );
