@@ -13,9 +13,10 @@ export default {
           },
           Favorites: {
             screens: {
-              CounterScreen: 'two',
+              FavoritesScreen: 'favorites',
             },
           },
+          Counter: 'counter',
         },
       },
       NotFound: '*',
