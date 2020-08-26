@@ -11,9 +11,9 @@ export default {
               PhotosScreen: 'photos',
             },
           },
-          TabTwo: {
+          Favorites: {
             screens: {
-              TabTwoScreen: 'two',
+              CounterScreen: 'two',
             },
           },
         },
