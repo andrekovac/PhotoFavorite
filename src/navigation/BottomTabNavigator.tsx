@@ -6,7 +6,7 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import PhotosScreen from '../screens/PhotosScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import CounterScreen from '../screens/CounterScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -22,14 +22,14 @@ export default function BottomTabNavigator() {
         name="Photos"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Counter"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="md-clock" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -64,9 +64,9 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        name="CounterScreen"
+        component={CounterScreen}
+        options={{ headerTitle: 'Counter' }}
       />
     </TabTwoStack.Navigator>
   );
