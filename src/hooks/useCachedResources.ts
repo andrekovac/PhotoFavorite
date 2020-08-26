@@ -14,6 +14,8 @@ export default function useCachedResources() {
 
         // Load fonts
         await Font.loadAsync({
+          Roboto: require('native-base/Fonts/Roboto.ttf'),
+          Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
           ...Ionicons.font,
           'space-mono': require('../../assets/fonts/SpaceMono-Regular.ttf'),
         });
