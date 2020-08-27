@@ -24,6 +24,9 @@ export default function App() {
         setCount((prevCount) => prevCount - 1);
       }
     },
+    reset: () => {
+      setCount(0);
+    },
   };
 
   if (!isLoadingComplete) {
