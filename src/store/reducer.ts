@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 import { CounterActionT } from "./actionCreators";
-import { INCREMENT, DECREMENT } from "./actionTypes";
+import { INCREMENT, DECREMENT, RESET } from "./actionTypes";
 
 const defaultState: number = 0;
 
@@ -10,10 +10,13 @@ const counterReducer = (state = defaultState, action: CounterActionT) => {
     case INCREMENT:
       state = state + 1;
       break;
-      case DECREMENT:
+    case DECREMENT:
       if (state > 0) {
         state = state - 1;
       }
+      break;
+    case RESET:
+      state = 0;
       break;
   }
   return state;

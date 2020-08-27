@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CounterActionT,
   increment as incrementAction,
   decrement as decrementAction,
+  reset as resetAction,
 } from "../store/actionCreators";
 import { StoreT } from "../store/reducer";
 
@@ -14,6 +15,7 @@ const CounterScreen = () => {
 
   const increment = () => dispatch(incrementAction());
   const decrement = () => dispatch(decrementAction());
+  const reset = () => dispatch(resetAction());
 
   const count = useSelector<StoreT, number>((state) => state.count);
 
@@ -25,6 +27,9 @@ const CounterScreen = () => {
       </Button>
       <Button onPress={decrement}>
         <Text>Decrement</Text>
+      </Button>
+      <Button onPress={reset}>
+        <Text>Reset</Text>
       </Button>
     </Container>
   );
