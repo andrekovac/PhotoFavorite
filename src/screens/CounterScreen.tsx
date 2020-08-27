@@ -5,13 +5,16 @@ import styled from "styled-components/native";
 import { CounterContext } from "../context";
 
 const CounterScreen = () => {
-  const { count, increment } = useContext(CounterContext);
+  const { count, increment, decrement } = useContext(CounterContext);
 
   return (
     <Container>
       <ClickedText>Clicked {count} times</ClickedText>
       <Button onPress={increment}>
         <Text>Increment</Text>
+      </Button>
+      <Button onPress={decrement}>
+        <Text>Decrement</Text>
       </Button>
     </Container>
   );
