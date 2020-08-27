@@ -33,7 +33,7 @@ export default function App() {
 
   const [{ data, isLoading, isError }, doFetch] = useDataApi(
     [],
-    "https://picsum.photos/v2/list?page=3&limit=100"
+    "https://picsum.photos/v2/list?page=1&limit=100"
   );
   const [photos, setPhotos] = useState<Array<ItemT>>([]);
 
