@@ -9,7 +9,11 @@ import { PhotosContext } from "../context";
  * Display all fetched photos
  */
 const PhotosScreen = () => {
-  const { photos, isLoading } = useContext(PhotosContext);
+  const { photos, fetchPhotos, isLoading } = useContext(PhotosContext);
+
+  useEffect(() => {
+    fetchPhotos("https://picsum.photos/v2/list?page=3&limit=100");
+  }, []);
 
   return (
     <>
