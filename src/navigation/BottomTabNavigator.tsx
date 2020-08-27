@@ -42,7 +42,7 @@ export default function BottomTabNavigator() {
         component={CounterScreen}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-clock" color={color} />,
-          tabBarBadge: count,
+          tabBarBadge: count || undefined,
         }}
       />
     </BottomTab.Navigator>
