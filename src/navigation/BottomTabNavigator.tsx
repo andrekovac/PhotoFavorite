@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -9,12 +10,14 @@ import PhotosScreen from '../screens/PhotosScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import CounterScreen from '../screens/CounterScreen';
 
+import { StoreT } from "../store/reducer";
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const count = useSelector<StoreT, number>((state) => state.count);
 
   return (
     <BottomTab.Navigator
@@ -39,6 +42,7 @@ export default function BottomTabNavigator() {
         component={CounterScreen}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-clock" color={color} />,
+          tabBarBadge: count || undefined,
         }}
       />
     </BottomTab.Navigator>
