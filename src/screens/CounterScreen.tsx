@@ -3,15 +3,17 @@ import { Text } from "react-native";
 import styled from "styled-components/native";
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IncrementActionT,
+import { CounterActionT,
   increment as incrementAction,
+  decrement as decrementAction,
 } from "../store/actionCreators";
 import { StoreT } from "../store/reducer";
 
 const CounterScreen = () => {
-  const dispatch = useDispatch<Dispatch<IncrementActionT>>();
+  const dispatch = useDispatch<Dispatch<CounterActionT>>();
 
   const increment = () => dispatch(incrementAction());
+  const decrement = () => dispatch(decrementAction());
 
   const count = useSelector<StoreT, number>((state) => state.count);
 
@@ -20,6 +22,9 @@ const CounterScreen = () => {
       <ClickedText>Clicked {count} times</ClickedText>
       <Button onPress={increment}>
         <Text>Increment</Text>
+      </Button>
+      <Button onPress={decrement}>
+        <Text>Decrement</Text>
       </Button>
     </Container>
   );
