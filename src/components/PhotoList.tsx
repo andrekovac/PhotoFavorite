@@ -1,20 +1,25 @@
-import React, { FunctionComponent } from "react";
+import React, { useEffect, useState, FunctionComponent } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 
 import Item, { ItemT } from "./Item";
+import useDataApi from "../hooks/useDataApi";
 
-type PhotoListPropsT = {
-  isLoading: boolean;
-  photos: Array<ItemT>;
-}
+const PhotoList = () => {
+  const [{ data, isLoading, isError }, doFetch] = useDataApi(
+    [],
+    "https://picsum.photos/v2/list?page=1&limit=100"
+  );
 
-const PhotoList: FunctionComponent<PhotoListPropsT> = ({ isLoading, photos }) => {
-  const renderItem = ({ item }: { item: ItemT }) => (
+  useEffect(() => {
+    doFetch("https://picsum.photos/v2/list?page=3&limit=100");
+  }, []);
+
+  const renderItem: FunctionComponent<{ item: ItemT }> = ({ item }) => (
     <Item
       id={item.id}
       download_url={item.download_url}
       author={item.author}
-      isFavorite={item.isFavorite}
+      isFavorite={false}
     />
   );
 
@@ -22,7 +27,7 @@ const PhotoList: FunctionComponent<PhotoListPropsT> = ({ isLoading, photos }) =>
     <ActivityIndicator />
   ) : (
     <FlatList
-      data={photos}
+      data={data}
       renderItem={renderItem}
       keyExtractor={({ id }) => id}
     />

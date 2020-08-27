@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import { ItemT } from "../components/Item";
 
@@ -12,8 +12,6 @@ const useDataApi = (initialData: ReadonlyArray<ItemT>, initialUrl: string) => {
   const [url, setUrl] = useState(initialUrl);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-
-  const isInitialMount = useRef(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,12 +30,7 @@ const useDataApi = (initialData: ReadonlyArray<ItemT>, initialUrl: string) => {
       setIsLoading(false);
     };
 
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      // Is only run on update, not on initial mount
-      fetchData();
-    }
+    fetchData();
   }, [url]);
 
   return [{ data, isLoading, isError }, setUrl] as const;
