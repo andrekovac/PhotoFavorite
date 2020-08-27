@@ -1,37 +1,34 @@
-import React, { FunctionComponent, useContext } from "react";
-import { View, Text } from "react-native";
-import styled from "styled-components/native";
+import React, { FunctionComponent } from "react";
+import { StyleSheet, View, Text } from "react-native";
 
 import PhotoList from "../components/PhotoList";
 import { ItemT } from "../components/Item";
 
-import { PhotosContext } from "../context";
-
 /**
- * Display picked favorites
+ * Fetch and display random photos
  */
 const FavoritesScreen: FunctionComponent<ItemT> = () => {
-  const { photos, isLoading } = useContext(PhotosContext);
+  const favorites: ReadonlyArray<ItemT> = [];
 
   return (
-    <ListWrapper>
-      {photos.length > 0 ? (
-        <PhotoList
-          isLoading={isLoading}
-          photos={photos.filter((photo) => photo.isFavorite)}
-        />
+    <View style={styles.container}>
+      {favorites.length > 0 ? (
+          <PhotoList />
       ) : (
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Text>No favorites yet</Text>
         </View>
       )}
-    </ListWrapper>
+    </View>
   );
 };
 
-const ListWrapper = styled.View`
-  /* children */
-  align-items: center;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center"
+  },
+});
 
 export default FavoritesScreen;
