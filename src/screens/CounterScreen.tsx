@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 
-const CounterScreen = () => {
-  const [count, setCount] = useState<number>(0);
+import { CounterContext } from "../context";
 
-  const increment = () => setCount((prev: number) => prev + 1);
+const CounterScreen = () => {
+  const { count, increment } = useContext(CounterContext);
 
   return (
     <Container>
