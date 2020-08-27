@@ -1,18 +1,14 @@
-import React, { useEffect, useState, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 
 import Item, { ItemT } from "./Item";
 import useDataApi from "../hooks/useDataApi";
 
 const PhotoList = () => {
-  const [{ data, isLoading, isError }, doFetch] = useDataApi(
+  const [{ data, isLoading }] = useDataApi(
     [],
-    "https://picsum.photos/v2/list?page=1&limit=100"
+    "https://picsum.photos/v2/list?page=3&limit=100"
   );
-
-  useEffect(() => {
-    doFetch("https://picsum.photos/v2/list?page=3&limit=100");
-  }, []);
 
   const renderItem: FunctionComponent<{ item: ItemT }> = ({ item }) => (
     <Item
