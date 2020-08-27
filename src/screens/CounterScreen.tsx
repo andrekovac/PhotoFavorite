@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { Dispatch } from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
+import { useDispatch, useSelector } from 'react-redux';
+
+import { IncrementActionT,
+  increment as incrementAction,
+} from "../store/actionCreators";
+import { StoreT } from "../store/reducer";
 
 const CounterScreen = () => {
-  const [count, setCount] = useState<number>(0);
+  const dispatch = useDispatch<Dispatch<IncrementActionT>>();
 
-  const increment = () => setCount((prev: number) => prev + 1);
+  const increment = () => dispatch(incrementAction());
+
+  const count = useSelector<StoreT, number>((state) => state.count);
 
   return (
     <Container>
