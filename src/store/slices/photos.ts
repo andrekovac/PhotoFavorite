@@ -74,26 +74,6 @@ export const {
   fetchPhotosError,
 } = photosSlice.actions;
 
-const fetchData = async (): Promise<PhotosDataT> => {
-  const response = await fetch(
-    "https://picsum.photos/v2/list?page=3&limit=100"
-  );
-  return response.json();
-};
-
-export const fetchPhotos = (): PhotosThunkAction => {
-  return async (dispatch: PhotosThunkDispatch) => {
-    try {
-      dispatch(fetchPhotosStart());
-      const photos = await fetchData();
-      dispatch(fetchPhotosSuccess(photos));
-    } catch (error) {
-      console.error("Error fetching photos", error);
-      dispatch(fetchPhotosError(error));
-    }
-  };
-};
-
 // Photos selector
 export const photosSelector = (state: RootStateT): PhotosT => state.photos;
 

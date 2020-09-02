@@ -2,7 +2,7 @@ import React, { useEffect, Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/native";
 
-import { fetchPhotos, photosSelector, PhotosT } from "../store/slices/photos";
+import { fetchPhotosStart, photosSelector, PhotosT } from "../store/slices/photos";
 import { RootStateT } from "../store/slices";
 
 import PhotoList from "../components/PhotoList";
@@ -11,7 +11,7 @@ const PhotosScreen = () => {
   const dispatch = useDispatch<Dispatch<any>>();
 
   useEffect(() => {
-    dispatch(fetchPhotos());
+    dispatch(fetchPhotosStart());
   }, []);
 
   const { data, isLoading } = useSelector<RootStateT, PhotosT>(photosSelector);
