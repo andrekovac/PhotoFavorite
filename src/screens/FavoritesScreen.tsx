@@ -13,7 +13,7 @@ const FavoritesScreen: FunctionComponent<ItemT> = () => {
   return (
     <View style={styles.container}>
       {favorites.length > 0 ? (
-          <PhotoList />
+          <PhotoList data={favorites} />
       ) : (
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Text>No favorites yet</Text>
