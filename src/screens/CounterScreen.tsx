@@ -7,7 +7,7 @@ import { CounterActionT,
   increment as incrementAction,
   decrement as decrementAction,
   reset as resetAction,
-} from "../store/actionCreators";
+} from "../store/actionCreators/counter";
 import { StoreT } from "../store/reducer";
 
 const CounterScreen = () => {

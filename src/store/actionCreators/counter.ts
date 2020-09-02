@@ -1,6 +1,6 @@
 import { Action } from "redux";
 
-import { INCREMENT, DECREMENT, RESET } from "./actionTypes";
+import { INCREMENT, DECREMENT, RESET } from "../actionTypes/counter";
 
 export type CounterActionT = {
   type: typeof INCREMENT | typeof DECREMENT | typeof RESET,
