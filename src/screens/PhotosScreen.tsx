@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect, Dispatch } from "react";
 import styled from "styled-components/native";
+import { useDispatch, useSelector } from "react-redux";
+
+import { fetchPhotos } from "../store/actionCreators/photos";
+import { ThunkResult } from "../store/actionCreators";
+import { StoreT } from "../store/reducer";
+import { PhotosT } from "../store/reducer/photos";
 
 import PhotoList from "../components/PhotoList";
-import useDataApi from "../hooks/useDataApi";
 
 const PhotosScreen = () => {
-  const [{ data, isLoading }] = useDataApi(
-    [],
-    "https://picsum.photos/v2/list?page=3&limit=100"
+  const dispatch = useDispatch<Dispatch<ThunkResult>>();
+
+  useEffect(() => {
+    dispatch(fetchPhotos());
+  }, []);
+
+  const photos = useSelector<StoreT, PhotosT>(
+    state => state.photos
   );
 
   return (
     <>
       <ListWrapper>
-        <PhotoList data={data} isLoading={isLoading} />
+        <PhotoList data={photos.data} isLoading={photos.isLoading} />
       </ListWrapper>
     </>
   );
