@@ -1,13 +1,10 @@
-import { createStore } from "redux";
-import { rootReducer } from "./reducer";
+import { configureStore } from "@reduxjs/toolkit";
 
-const devtools = () =>
-  __DEV__ &&
-  // @ts-ignore
-  window.__REDUX_DEVTOOLS_EXTENSION__ &&
-  // @ts-ignore
-  window.__REDUX_DEVTOOLS_EXTENSION__();
+import rootReducer from './slices';
 
-const store = createStore(rootReducer, devtools());
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: true,
+});
 
 export default store;
