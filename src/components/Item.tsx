@@ -2,6 +2,7 @@ import React from "react";
 import { Alert } from "react-native";
 import styled from 'styled-components/native';
 
+import useFavorites from "../hooks/redux/useFavorites";
 import Icon from "./Icon";
 
 export type ItemT = {
@@ -15,7 +16,7 @@ export type ItemT = {
  * A single image
  */
 const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
-  const toggleFavorite = (_id: string) => {};
+  const [_, toggleFavorite] = useFavorites();
 
   return (
     <Wrapper
