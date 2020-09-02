@@ -17,7 +17,8 @@ const PhotosScreen = () => {
   }, []);
 
   const photos = useSelector<StoreT, PhotosT>(
-    state => state.photos
+    (state) => state.photos,
+    (photosPrev, photosNew) => photosPrev.isLoading === photosNew.isLoading
   );
 
   return (
