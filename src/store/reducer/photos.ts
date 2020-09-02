@@ -1,6 +1,6 @@
 import { ItemT } from "../../components/Item";
 
-import { PhotosActionT, FavoriteActionT } from "../actionCreators/photos";
+import { PhotosActionT } from "../actionCreators/photos";
 import {
   PHOTOS_FETCH_START,
   PHOTOS_FETCH_ERROR,
@@ -23,22 +23,31 @@ const photosReducer = (
   state = defaultState,
   action: PhotosActionT
 ) => {
+  // Shallow copy of current state to create a new reference to this slice of the state
+  const newState = {
+    ...state,
+  };
+
   switch (action.type) {
     case PHOTOS_FETCH_START:
-      state.isLoading = true;
+      newState.isLoading = true;
+      newState.error = undefined;
       break;
     case PHOTOS_FETCH_SUCCESS:
-      state.data = action.photos.map((photo) => ({
+      newState.data = action.photos.map((photo) => ({
         ...photo,
         isFavorite: false,
       }));
-      state.isLoading = false;
+      newState.error = undefined;
+      newState.isLoading = false;
       break;
     case PHOTOS_FETCH_ERROR:
-      state.error = action.error;
+      newState.error = action.error;
+      newState.isLoading = false;
+      newState.data = [];
       break;
   }
-  return state;
+  return newState;
 };
 
 export default photosReducer;
