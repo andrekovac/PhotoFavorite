@@ -1,13 +1,9 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { Alert } from "react-native";
-import { useDispatch } from "react-redux";
 import styled from "styled-components/native";
 
 import Icon from "./Icon";
-import {
-  toggleFavorite,
-  FavoriteActionT,
-} from "../store/actionCreators/photos";
+import useFavorites from "../hooks/redux/useFavorites";
 
 export type ItemT = {
   id: string;
@@ -20,7 +16,7 @@ export type ItemT = {
  * A single image
  */
 const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
-  const dispatch = useDispatch<Dispatch<FavoriteActionT>>();
+  const [_, toggleFavorite] = useFavorites();
 
   return (
     <Wrapper
@@ -34,7 +30,7 @@ const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
         style={{ width: 300, height: 300 }}
         source={{ uri: download_url }}
       />
-      <FavoriteButton onPress={() => dispatch(toggleFavorite(id))}>
+      <FavoriteButton onPress={() => toggleFavorite(id)}>
         <Icon name={`md-star${isFavorite ? "" : "-outline"}`} />
       </FavoriteButton>
     </Wrapper>
