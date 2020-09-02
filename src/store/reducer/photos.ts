@@ -5,6 +5,7 @@ import {
   PHOTOS_FETCH_START,
   PHOTOS_FETCH_ERROR,
   PHOTOS_FETCH_SUCCESS,
+  FAVORITE_TOGGLE,
 } from "../actionTypes/photos";
 
 export type PhotosT = {
@@ -21,7 +22,7 @@ const defaultState: PhotosT = {
 
 const photosReducer = (
   state = defaultState,
-  action: PhotosActionT
+  action: PhotosActionT | FavoriteActionT
 ) => {
   // Shallow copy of current state to create a new reference to this slice of the state
   const newState = {
@@ -46,6 +47,12 @@ const photosReducer = (
       newState.isLoading = false;
       newState.data = [];
       break;
+    case FAVORITE_TOGGLE:
+      newState.data = state.data.map((photo) =>
+        photo.id === action.id
+          ? { ...photo, isFavorite: !photo.isFavorite }
+          : photo
+      );
       break;
   }
   return newState;
