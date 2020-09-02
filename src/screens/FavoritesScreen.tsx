@@ -1,19 +1,16 @@
 import React, { FunctionComponent } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { useSelector } from "react-redux";
 
 import PhotoList from "../components/PhotoList";
 
 import { ItemT } from "../components/Item";
-import { StoreT } from "../store/reducer";
+import useFavorites from "../hooks/redux/useFavorites";
 
 /**
  * Fetch and display random photos
  */
 const FavoritesScreen: FunctionComponent<ItemT> = () => {
-  const favorites = useSelector<StoreT, ReadonlyArray<ItemT>>(
-    state => state.photos.data.filter(photo => photo.isFavorite)
-  );
+  const [favorites] = useFavorites();
 
   return (
     <View style={styles.container}>
