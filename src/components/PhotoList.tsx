@@ -15,7 +15,7 @@ const PhotoList: FunctionComponent<PhotoListPropsT> = ({ data, isLoading = false
       id={item.id}
       download_url={item.download_url}
       author={item.author}
-      isFavorite={false}
+      isFavorite={item.isFavorite}
     />
   );
 

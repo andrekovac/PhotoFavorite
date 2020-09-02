@@ -62,3 +62,19 @@ export const fetchPhotos = (): ThunkResult => {
     }
   };
 };
+
+// ---------
+// Favorites
+// ---------
+
+export type FavoriteActionT = {
+  type: typeof FAVORITE_TOGGLE;
+  id: string;
+};
+
+export const toggleFavorite = (id: string): FavoriteActionT => {
+  return {
+    type: FAVORITE_TOGGLE,
+    id,
+  };
+};
