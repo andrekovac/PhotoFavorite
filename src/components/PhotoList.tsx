@@ -2,20 +2,20 @@ import React, { FunctionComponent } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 
 import Item, { ItemT } from "./Item";
-import useDataApi from "../hooks/useDataApi";
+import { PhotosDataT } from "../store/slices/photos";
 
-const PhotoList = () => {
-  const [{ data, isLoading }] = useDataApi(
-    [],
-    "https://picsum.photos/v2/list?page=3&limit=100"
-  );
+interface PhotoListPropsT {
+  data: PhotosDataT;
+  isLoading?: boolean;
+}
 
+const PhotoList: FunctionComponent<PhotoListPropsT> = ({ data, isLoading = false }) => {
   const renderItem: FunctionComponent<{ item: ItemT }> = ({ item }) => (
     <Item
       id={item.id}
       download_url={item.download_url}
       author={item.author}
-      isFavorite={false}
+      isFavorite={item.isFavorite}
     />
   );
 
