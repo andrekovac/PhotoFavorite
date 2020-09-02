@@ -1,6 +1,6 @@
 import React, { useEffect, Dispatch } from "react";
 import styled from "styled-components/native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { fetchPhotos } from "../store/actionCreators/photos";
 import { ThunkResult } from "../store/actionCreators";
@@ -17,7 +17,8 @@ const PhotosScreen = () => {
   }, []);
 
   const photos = useSelector<StoreT, PhotosT>(
-    state => state.photos
+    (state) => state.photos,
+    (photosPrev, photosNew) => photosPrev.isLoading === photosNew.isLoading
   );
 
   return (
