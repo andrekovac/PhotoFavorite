@@ -16,12 +16,22 @@ const PhotosScreen = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://picsum.photos/v2/list?page=3&limit=100"
+      );
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false)
+    }
+  };
+
   useEffect(() => {
-    fetch("https://picsum.photos/v2/list?page=3&limit=100")
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+    fetchData();
   }, []);
 
   const renderItem = ({ item }: { item: ItemT }) => (
