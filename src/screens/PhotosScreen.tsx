@@ -1,31 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { FlatList } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 
 type ItemT = {
   id: string;
-  title: string;
+  author: string;
+  download_url: string;
 };
 
-const Item = ({ title }: { title: string }) => (
-  <ItemWrapper>
-    <ItemText>{title}</ItemText>
-  </ItemWrapper>
+const Item = ({ download_url }: Pick<ItemT, "download_url">) => (
+  <ItemImage source={{ uri: download_url }} />
 );
 
 const PhotosScreen = () => {
-  const placeholderList: ItemT[] = Array(100)
-    .fill(0)
-    .map((_, i) => ({ id: String(i + 1), title: `Title ${i + 1}` }));
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-  const renderItem = ({ item }: { item: ItemT }) => <Item title={item.title} />;
+  useEffect(() => {
+    fetch("https://picsum.photos/v2/list?page=3&limit=100")
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
 
-  return (
+  const renderItem = ({ item }: { item: ItemT }) => (
+    <Item download_url={item.download_url} />
+  );
+
+  return isLoading ? (
+    <ActivityIndicator />
+  ) : (
     <Wrapper>
       <FlatList
-        data={placeholderList}
+        data={data}
         renderItem={renderItem}
-        keyExtractor={(item: ItemT) => item.id}
+        keyExtractor={({ id }) => id}
       />
     </Wrapper>
   );
@@ -39,20 +49,10 @@ const Wrapper = styled.View`
   align-items: center;
 `;
 
-const ItemWrapper = styled.View`
+const ItemImage = styled.Image`
+  margin: 5px 0;
   height: 300px;
   width: 300px;
-  background-color: #3f87f5;
-  margin: 5px 0;
-
-  /* children */
-  justify-content: center;
-  align-items: center;
-`;
-
-const ItemText = styled.Text`
-  color: white;
-  font-size: 22px;
 `;
 
 export default PhotosScreen;
