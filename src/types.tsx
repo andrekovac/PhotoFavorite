@@ -5,13 +5,13 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Photos: undefined;
-  TabTwo: undefined;
+  Counter: undefined;
 };
 
 export type PhotosParamList = {
   PhotosScreen: undefined;
 };
 
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
+export type CounterParamList = {
+  CounterScreen: undefined;
 };
