@@ -13,15 +13,16 @@ type ItemT = {
   download_url: string;
 };
 
-const Item = ({ download_url, author }: Omit<ItemT, "id">) => (
-  <TouchableOpacity
-    onPress={() => {
-      Alert.alert("Artist", author, [{ text: "OK" }], { cancelable: false });
-    }}
-  >
-    <ItemImage source={{ uri: download_url }} />
-  </TouchableOpacity>
-);
+const handlePress = (author: string) =>
+  Alert.alert("Artist", author, [{ text: "OK" }], { cancelable: false });
+
+const Item = ({ download_url, author }: Omit<ItemT, "id">) => {
+  return (
+    <TouchableOpacity onPress={() => handlePress(author)}>
+      <ItemImage source={{ uri: download_url }} />
+    </TouchableOpacity>
+  );
+};
 
 const PhotosScreen = () => {
   const [isLoading, setLoading] = useState(true);
