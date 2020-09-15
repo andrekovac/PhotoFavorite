@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import React, { Dispatch, useCallback } from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,9 +13,18 @@ import { StoreT } from "../store/reducer";
 const CounterScreen = () => {
   const dispatch = useDispatch<Dispatch<CounterActionT>>();
 
-  const increment = () => dispatch(incrementAction());
-  const decrement = () => dispatch(decrementAction());
-  const reset = () => dispatch(resetAction());
+  const increment = useCallback(
+    () => dispatch(incrementAction()),
+    [dispatch]
+  );
+  const decrement = useCallback(
+    () => dispatch(decrementAction()),
+    [dispatch]
+  );
+  const reset = useCallback(
+    () => dispatch(resetAction()),
+    [dispatch]
+  );
 
   const count = useSelector<StoreT, number>((state) => state.count);
 
