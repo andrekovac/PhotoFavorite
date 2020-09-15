@@ -1,35 +1,27 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 import { useDispatch, useSelector } from 'react-redux';
+import { Action, Dispatch } from "@reduxjs/toolkit";
 
-import { CounterActionT,
+import {
   increment as incrementAction,
-  decrement as decrementAction,
-  reset as resetAction,
-} from "../store/actionCreators";
-import { StoreT } from "../store/reducer";
+  counterSelector,
+} from "../store/slices/counter";
+import { RootStateT } from "../store/slices";
 
 const CounterScreen = () => {
-  const dispatch = useDispatch<Dispatch<CounterActionT>>();
+  const dispatch = useDispatch<Dispatch<Action>>();
 
   const increment = () => dispatch(incrementAction());
-  const decrement = () => dispatch(decrementAction());
-  const reset = () => dispatch(resetAction());
 
-  const count = useSelector<StoreT, number>((state) => state.count);
+  const count = useSelector<RootStateT, number>(counterSelector);
 
   return (
     <Container>
       <ClickedText>Clicked {count} times</ClickedText>
       <Button onPress={increment}>
         <Text>Increment</Text>
-      </Button>
-      <Button onPress={decrement}>
-        <Text>Decrement</Text>
-      </Button>
-      <Button onPress={reset}>
-        <Text>Reset</Text>
       </Button>
     </Container>
   );
