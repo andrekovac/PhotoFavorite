@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPhotos } from "../store/actionCreators/photos";
 import { ThunkResult } from "../store/actionCreators";
 import { StoreT } from "../store/reducer";
-import { PhotosT } from "../store/reducer/photos";
+import { selectPhotosByCounterValue } from '../store/selectors';
 
 import PhotoList from "../components/PhotoList";
+import { ItemT } from "../components/Item";
 
 const PhotosScreen = () => {
   const dispatch = useDispatch<Dispatch<ThunkResult>>();
@@ -16,14 +17,18 @@ const PhotosScreen = () => {
     dispatch(fetchPhotos());
   }, []);
 
-  const photos = useSelector<StoreT, PhotosT>(
-    state => state.photos
+  const isLoading = useSelector<StoreT, boolean>(
+    state => !!state.photos.isLoading
+  );
+
+  const data = useSelector<StoreT, ReadonlyArray<ItemT>>(
+    selectPhotosByCounterValue
   );
 
   return (
     <>
       <ListWrapper>
-        <PhotoList data={photos.data} isLoading={photos.isLoading} />
+        <PhotoList data={data} isLoading={isLoading} />
       </ListWrapper>
     </>
   );
