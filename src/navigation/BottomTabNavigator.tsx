@@ -10,14 +10,14 @@ import PhotosScreen from '../screens/PhotosScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import CounterScreen from '../screens/CounterScreen';
 
-import { StoreT } from "../store/reducer";
+import { RootStateT } from "../store/slices";
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  const count = useSelector<StoreT, number>((state) => state.count);
+  const count = useSelector<RootStateT, number>((state) => state.count);
 
   return (
     <BottomTab.Navigator
