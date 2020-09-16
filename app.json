@@ -19,10 +19,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.workshop.PhotoFavorite"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "sdkVersion": "38.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "android": {
+      "package": "com.workshop.PhotoFavorite"
     }
   }
 }
