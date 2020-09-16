@@ -6,6 +6,7 @@ import { Action, Dispatch } from "@reduxjs/toolkit";
 
 import {
   increment as incrementAction,
+  decrement as decrementAction,
   counterSelector,
 } from "../store/slices/counter";
 import { RootStateT } from "../store/slices";
@@ -14,6 +15,7 @@ const CounterScreen = () => {
   const dispatch = useDispatch<Dispatch<Action>>();
 
   const increment = () => dispatch(incrementAction());
+  const decrement = () => dispatch(decrementAction());
 
   const count = useSelector<RootStateT, number>(counterSelector);
 
@@ -22,6 +24,9 @@ const CounterScreen = () => {
       <ClickedText>Clicked {count} times</ClickedText>
       <Button onPress={increment}>
         <Text>Increment</Text>
+      </Button>
+      <Button onPress={decrement}>
+        <Text>Decrement</Text>
       </Button>
     </Container>
   );

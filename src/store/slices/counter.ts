@@ -9,11 +9,13 @@ const counterSlice = createSlice({
   initialState,
   reducers: {
     increment: state => state + 1,
+    // Note that state updates are immutable (with mutable code) thanks to the `immer` library which is used under the hood by redux-toolkit
+    decrement: state => state > 0 ? state - 1 : state,
   },
 });
 
 // Two actions generated from the slice
-export const { increment } = counterSlice.actions;
+export const { increment, decrement } = counterSlice.actions;
 
 // A selector
 export const counterSelector = (state: RootStateT) => state.count;
