@@ -8,6 +8,7 @@ import {
   fetchPhotos,
   PhotosDataT,
   PhotosT,
+  initialState as initalPhotosState,
 } from "../../store/slices/photos";
 
 const usePhotos = (): {
@@ -18,7 +19,9 @@ const usePhotos = (): {
   const { data, isLoading } = useSelector<RootStateT, PhotosT>(photosSelector);
 
   useEffect(() => {
-    dispatch(fetchPhotos());
+    if (data === initalPhotosState.data) {
+      dispatch(fetchPhotos());
+    };
   }, []);
 
   return { data, isLoading };
