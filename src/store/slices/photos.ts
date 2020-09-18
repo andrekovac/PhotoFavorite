@@ -9,7 +9,7 @@ import {
 import { RootStateT } from "./index";
 import { ItemT } from "../../components/Item";
 
-export type PhotosDataT = ReadonlyArray<ItemT>
+export type PhotosDataT = ReadonlyArray<ItemT>;
 export type PhotosT = {
   data: PhotosDataT;
   error?: Error;
@@ -82,8 +82,17 @@ const fetchData = async (): Promise<PhotosDataT> => {
 };
 
 export const fetchPhotos = (): PhotosThunkAction => {
-  return async (dispatch: PhotosThunkDispatch) => {
+  return async (dispatch: PhotosThunkDispatch, getState) => {
     try {
+      const {
+        photos: { data },
+      } = getState();
+
+      if (data !== initialState.data) {
+        // Don't fetch data if it is already persisted in the Redux store.
+        return;
+      }
+
       dispatch(fetchPhotosStart());
       const photos = await fetchData();
       dispatch(fetchPhotosSuccess(photos));
