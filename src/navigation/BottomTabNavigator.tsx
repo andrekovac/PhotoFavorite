@@ -10,14 +10,16 @@ import PhotosScreen from '../screens/PhotosScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import CounterScreen from '../screens/CounterScreen';
 
-import { StoreT } from "../store/reducer";
+import { RootStateT } from "../store/slices";
+import { selectFavoritesCount } from '../store/selectors';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  const count = useSelector<StoreT, number>((state) => state.count);
+  const count = useSelector<RootStateT, number>((state) => state.count);
+  const favoritesCount = useSelector<RootStateT, number>(selectFavoritesCount);
 
   return (
     <BottomTab.Navigator
@@ -35,6 +37,7 @@ export default function BottomTabNavigator() {
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-heart" color={color} />,
+          tabBarBadge: favoritesCount || undefined,
         }}
       />
       <BottomTab.Screen
