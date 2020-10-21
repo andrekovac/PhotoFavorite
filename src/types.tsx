@@ -1,5 +1,10 @@
+import { StackScreenProps } from "@react-navigation/stack";
+
+import { ItemT } from "./components/Item";
+
 export type RootStackParamList = {
   Root: undefined;
+  Modal: { item: ItemT };
   NotFound: undefined;
 };
 
@@ -16,3 +21,5 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   FavoritesScreen: undefined;
 };
+
+export type ModalScreenProps = StackScreenProps<RootStackParamList, "Modal">;

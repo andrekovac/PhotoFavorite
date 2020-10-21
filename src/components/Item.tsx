@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert } from "react-native";
+import { Alert, Image } from "react-native";
 import styled from 'styled-components/native';
 
 import useFavorites from "../hooks/redux/useFavorites";
@@ -10,19 +10,26 @@ export type ItemT = {
   author: string;
   download_url: string;
   isFavorite: boolean;
+  onPress?: () => void;
 }
 
 /**
  * A single image
  */
-const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
+const Item = ({ id, author, download_url, isFavorite, onPress }: ItemT) => {
   const [_, toggleFavorite] = useFavorites();
+
+  const handleWrapperPress = () => {
+    if (onPress) {
+      onPress();
+    } else {
+      Alert.alert("Photographer", author, [{ text: "OK" }], { cancelable: false });
+    }
+  }
 
   return (
     <Wrapper
-      onPress={() => {
-        Alert.alert("Photographer", author, [{ text: "OK" }], { cancelable: false });
-      }}
+      onPress={handleWrapperPress}
     >
       <Image
         style={{ width: 300, height: 300 }}
@@ -41,11 +48,6 @@ export default Item;
 
 const Wrapper = styled.TouchableOpacity`
   margin: 8px 16px;
-`;
-
-const Image = styled.Image`
-  width: 300px;
-  height: 300px;
 `;
 
 const FavoriteButton = styled.TouchableOpacity`
