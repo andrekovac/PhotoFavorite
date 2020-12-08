@@ -29,6 +29,7 @@ function* fetchData() {
   }
 }
 
+// Watcher Saga: Listens to dispatched fetchPhotosStart actions
 function* fetchSaga() {
   yield takeLatest(fetchPhotosStart.type, fetchData);
 }
@@ -43,6 +44,7 @@ function* countTill20() {
   }
 }
 
+// Watcher and Worker Saga in one
 function* numbersSaga() {
   // instead of while(true), takeEvery or takeLatest can be used
   while (true) {
@@ -59,8 +61,10 @@ function* numbersSaga() {
   }
 }
 
+// Root Saga: Spwan all watcher sagas in a non-blocking fashion
 function* rootSaga() {
   yield all([
+    // Add new sagas by forking them here
     fork(fetchSaga),
     fork(numbersSaga),
   ]);
