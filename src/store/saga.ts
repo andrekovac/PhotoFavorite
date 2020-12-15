@@ -8,19 +8,21 @@ import {
   select,
   take,
   takeLatest,
+  StrictEffect,
 } from "redux-saga/effects";
 
 import {
   fetchPhotosError,
   fetchPhotosStart,
   fetchPhotosSuccess,
+  PhotosDataT,
 } from "../store/slices/photos";
 import { increment, decrement, reset } from "../store/slices/counter";
 
 import { fetchPhotos } from "../api/photos";
 
 // Worker Saga: Will be fired when fetchPhotosStart action is dispatched
-export function* fetchData() {
+export function* fetchData(): Generator<StrictEffect, void, PhotosDataT> {
   try {
     const photos = yield call(fetchPhotos);
     yield put(fetchPhotosSuccess(photos));
@@ -30,7 +32,7 @@ export function* fetchData() {
 }
 
 // Watcher Saga: Listens to dispatched fetchPhotosStart actions
-function* fetchSaga() {
+function* fetchSaga(): Generator<StrictEffect, void, string> {
   yield takeLatest(fetchPhotosStart.type, fetchData);
 }
 
@@ -45,7 +47,7 @@ function* countTill20() {
 }
 
 // Watcher and Worker Saga in one
-function* numbersSaga() {
+function* numbersSaga(): Generator<StrictEffect, void, any> {
   // instead of while(true), takeEvery or takeLatest can be used
   while (true) {
     yield take(reset.type);
@@ -62,7 +64,7 @@ function* numbersSaga() {
 }
 
 // Root Saga: Spwan all watcher sagas in a non-blocking fashion
-function* rootSaga() {
+function* rootSaga(): Generator<StrictEffect, void, Generator> {
   yield all([
     // Add new sagas by forking them here
     fork(fetchSaga),
