@@ -29,7 +29,7 @@ export type PhotosThunkDispatch = ThunkDispatch<
   FetchPhotosSuccessAction | PayloadAction<Error | undefined>
 >;
 
-const initialState: PhotosT = {
+export const initialState: PhotosT = {
   data: [],
   error: undefined,
   isLoading: false,
