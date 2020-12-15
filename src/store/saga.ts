@@ -20,7 +20,7 @@ import { increment, decrement, reset } from "../store/slices/counter";
 import { fetchPhotos } from "../api/photos";
 
 // Worker Saga: Will be fired when fetchPhotosStart action is dispatched
-function* fetchData() {
+export function* fetchData() {
   try {
     const photos = yield call(fetchPhotos);
     yield put(fetchPhotosSuccess(photos));
