@@ -26,13 +26,16 @@ What you'll see is some default code of a so-called **Expo snack** - that is som
 
 **4. Run App on your device**
 
-On the right-hand side, make sure `My Device` is selected and a big QR code is visble.
+1. On the right-hand side, make sure `My Device` is selected and a big QR code is visible.
 
-Scan the QR Code with your Smartphone:
+2. Scan the QR Code with your Smartphone:
 
-- **iPhone**: Just use your normal Camera App and hold your phone up so you can see the QR Code in the screen.
-- **Android**: Scan the QR Code by opening the **Expo Go App** and tapping on **Scan QR Code**.
+   - **iPhone**: Just use your normal Camera App and hold your phone up so you can see the QR Code in the screen.
+   - **Android**: Scan the QR Code by opening the **Expo Go App** and tapping on **Scan QR Code**.
 
+3. Well done! You should see a super basic App with a temporary screen from Expo on your device 🎉.
+
+**Troubleshooting**: If your app doesn't start, try to change the **Connection** to `Tunnel` on the left-hand side menu in the Expo Dev Tools.
 
 ## Operating System
 
@@ -77,8 +80,11 @@ npm -v
 
 **4. IDE / Editor**
 
-You should install an IDE or a text editor with JavaScript support. We recommend WebStorm as commercial option (<https://www.jetbrains.com/webstorm/>) or Visual Studio Code (<https://code.visualstudio.com/>) as free open-source option.
+Install an IDE or editor. Recommendations:
 
+- [Visual Studio Code](https://code.visualstudio.com/) is a great free and open-source option.
+  - In this case install the `React Native Tools` and `vscode-styled-components` extensions.
+- [WebStorm](https://www.jetbrains.com/webstorm/) is a commercial option.
 
 ### Test run of a basic Expo App
 
@@ -94,8 +100,9 @@ You should install an IDE or a text editor with JavaScript support. We recommend
     - **iPhone**: Just use your normal Camera App and hold your phone up so you can see the QR Code in the screen.
     - **Android**: Scan the QR Code via the Expo Go App.
 
-6. Well done! You should see a super basic App with temporary screens from Expo on your screen 🎉.
+6. Well done! You should see a super basic App with temporary screens from Expo on your device 🎉.
 
+**Troubleshooting**: If your app doesn't start, try to change the **Connection** to `Tunnel` on the left-hand side menu in the Expo Dev Tools.
 
 ## Advanced
 
