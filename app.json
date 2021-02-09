@@ -8,7 +8,7 @@
     "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "photoFavorite",
+    "scheme": "photo-favorite",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",

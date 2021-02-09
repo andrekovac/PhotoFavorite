@@ -27,7 +27,7 @@ An app to learn React Native. Used at [André Kovac](https://www.andrekovac.com/
 
 ### Development Instructions
 
-- Setup Instructions: [Setup your computer for local React Native development on your computer](./docs/setup.md.md)
+- Setup Instructions: [Setup your computer for local React Native development on your computer](./docs/setup.md)
 - Run Instructions: [How to run the development build of the PhotoFavorite App locally with Expo Dev Tools](./docs/run-locally.md)
 
 ### Education
