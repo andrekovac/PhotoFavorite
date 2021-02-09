@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "PhotoFavorite",
+    "name": "Photo Favorite",
+    "description": "An app to learn React Native.\n\nTap on Photos to see the Authors and tap on the Star to favorite (or un-favorite) photos.\nUsed at André Kovac's workshops. Visit his homepage to get in touch with him to learn React Native in an interactive way: https://www.andrekovac.com/",
     "slug": "PhotoFavorite",
-    "version": "1.1.0",
+    "githubUrl": "https://github.com/andrekovac/PhotoFavorite/",
+    "privacy": "public",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "photoFavorite",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
