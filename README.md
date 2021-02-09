@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://expo.io/@andrusch/PhotoFavorite">
+    <img alt="Photo Favorite Logo" src="./assets/images/PhotoFavoriteCamera.svg" width="100" />
+  </a>
+</p>
+
 <h1 align="center">
   Photo Favorite
 </h1>

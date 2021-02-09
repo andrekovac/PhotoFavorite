@@ -2,7 +2,7 @@
   "expo": {
     "name": "PhotoFavorite",
     "slug": "PhotoFavorite",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#472D4E"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
