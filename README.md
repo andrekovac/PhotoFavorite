@@ -25,11 +25,13 @@ An app to learn React Native. Used at [André Kovac](https://www.andrekovac.com/
   - **iPhone**: Just open the build-in Camera and point it to the QR code.
   - **Android**: Open the **Expo Go App** and in there tap on Scan QR Code
 
-### Development
+### Development Instructions
 
-- [Setup your computer for local React Native development on your computer](./docs/run-locally.md)
-- [Instructions on how to run the development build of the PhotoFavorite App locally with Expo Dev Tools](./docs/run-locally.md)
+- Setup Instructions: [Setup your computer for local React Native development on your computer](./docs/setup.md.md)
+- Run Instructions: [How to run the development build of the PhotoFavorite App locally with Expo Dev Tools](./docs/run-locally.md)
 
 ### Education
+
+This App is progressively built by people who learn React Native. Read more about what you'll learn:
 
 - [Overview of branches which teach different concepts of React + React Native](./docs/notable-branches.md)
