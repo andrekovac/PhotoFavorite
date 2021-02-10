@@ -10,18 +10,18 @@ import {
   PhotosT,
 } from "../../store/slices/photos";
 
-const usePhotos = (): {
+const usePhotos = (): [{
   data: PhotosDataT;
   isLoading: boolean;
-} => {
+}, () => void] => {
   const dispatch = useDispatch<Dispatch<any>>();
   const { data, isLoading } = useSelector<RootStateT, PhotosT>(photosSelector);
 
-  useEffect(() => {
+  const getPhotos = () => {
     dispatch(fetchPhotos());
-  }, []);
+  }
 
-  return { data, isLoading };
+  return [{ data, isLoading }, getPhotos];
 };
 
 export default usePhotos;

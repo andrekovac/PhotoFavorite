@@ -7,9 +7,16 @@ import { PhotosDataT } from "../store/slices/photos";
 interface PhotoListPropsT {
   data: PhotosDataT;
   isLoading?: boolean;
+  onRefresh: () => void;
+  refreshing: boolean;
 }
 
-const PhotoList: FunctionComponent<PhotoListPropsT> = ({ data, isLoading = false }) => {
+const PhotoList: FunctionComponent<PhotoListPropsT> = ({
+  data,
+  isLoading = false,
+  onRefresh,
+  refreshing,
+}) => {
   const renderItem: FunctionComponent<{ item: ItemT }> = ({ item }) => (
     <Item
       id={item.id}
@@ -26,6 +33,8 @@ const PhotoList: FunctionComponent<PhotoListPropsT> = ({ data, isLoading = false
       data={data}
       renderItem={renderItem}
       keyExtractor={({ id }) => id}
+      onRefresh={onRefresh}
+      refreshing={refreshing}
     />
   );
 };
