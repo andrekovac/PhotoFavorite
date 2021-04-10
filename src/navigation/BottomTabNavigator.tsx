@@ -10,7 +10,7 @@ import PhotosScreen from '../screens/PhotosScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import CounterScreen from '../screens/CounterScreen';
 
-import { RootStateT } from "../store/slices";
+import { RootStateT } from '../store/slices';
 import { selectFavoritesCount } from '../store/selectors';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
@@ -24,19 +24,24 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Photos"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+    >
       <BottomTab.Screen
         name="Photos"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="ios-camera" color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
         name="Favorites"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-heart" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="ios-heart" color={color} />
+          ),
           tabBarBadge: favoritesCount || undefined,
         }}
       />
@@ -44,7 +49,9 @@ export default function BottomTabNavigator() {
         name="Counter"
         component={CounterScreen}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-time" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="ios-time" color={color} />
+          ),
           tabBarBadge: count || undefined,
         }}
       />
@@ -54,7 +61,10 @@ export default function BottomTabNavigator() {
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
-function TabBarIcon(props: { name: string; color: string }) {
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof Ionicons>['name'];
+  color: string;
+}) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
