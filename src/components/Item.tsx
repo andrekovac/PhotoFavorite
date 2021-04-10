@@ -1,39 +1,47 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Alert } from "react-native";
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 import useFavorites from "../hooks/redux/useFavorites";
 import Icon from "./Icon";
+import SwipeableElement from "./SwipeableElement";
+
+const SIZE = 300;
 
 export type ItemT = {
   id: string;
   author: string;
   download_url: string;
   isFavorite: boolean;
-}
+};
 
 /**
  * A single image
  */
 const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
-  const [_, toggleFavorite] = useFavorites();
+  const [_, updateFavorite] = useFavorites();
+  const handleSwipeEnd = (direction: "left" | "right") => {
+    updateFavorite(id, direction === "right");
+  };
 
   return (
-    <Wrapper
-      onPress={() => {
-        Alert.alert("Photographer", author, [{ text: "OK" }], { cancelable: false });
-      }}
+    <SwipeableElement
+      threshold={SIZE / 2}
+      onSwipeEndOverThreshold={handleSwipeEnd}
     >
-      <Image
-        style={{ width: 300, height: 300 }}
-        source={{ uri: download_url }}
-      />
-      <FavoriteButton
-        onPress={() => toggleFavorite(id)}
+      <Wrapper
+        onPress={() => {
+          Alert.alert("Photographer", author, [{ text: "OK" }], {
+            cancelable: false,
+          });
+        }}
       >
-        <Icon name={`md-star${isFavorite ? "" : "-outline"}`} />
-      </FavoriteButton>
-    </Wrapper>
+        <Image source={{ uri: download_url }} />
+        <FavoriteButton onPress={() => updateFavorite(id, !isFavorite)}>
+          <Icon name={isFavorite ? "md-star" : "md-star-outline"} />
+        </FavoriteButton>
+      </Wrapper>
+    </SwipeableElement>
   );
 };
 
@@ -44,8 +52,8 @@ const Wrapper = styled.TouchableOpacity`
 `;
 
 const Image = styled.Image`
-  width: 300px;
-  height: 300px;
+  width: ${SIZE}px;
+  height: ${SIZE}px;
 `;
 
 const FavoriteButton = styled.TouchableOpacity`

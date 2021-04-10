@@ -1,16 +1,14 @@
-import React, { FunctionComponent } from "react";
-import { Ionicons } from "@expo/vector-icons";
+import React, { ComponentProps, FunctionComponent } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
+import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
 
 type IconPropsT = {
-  name: string;
+  name: ComponentProps<typeof Ionicons>['name'];
 };
 
-const Icon: FunctionComponent<IconPropsT> = ({
-  name
-}: IconPropsT) => {
+const Icon: FunctionComponent<IconPropsT> = ({ name }: IconPropsT) => {
   const theme = useColorScheme();
 
   return <Ionicons name={name} size={30} color={Colors[theme].background} />;
