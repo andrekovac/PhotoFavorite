@@ -16,7 +16,10 @@ export type PhotosT = {
   isLoading: boolean;
 };
 export type FetchPhotosSuccessAction = PayloadAction<PhotosDataT>;
-export type ToggleFavoritesAction = PayloadAction<string>;
+export type UpdateFavoritesAction = PayloadAction<{
+  id: string;
+  isFavorite: boolean;
+}>;
 export type PhotosThunkAction = ThunkAction<
   Promise<void>,
   RootStateT,
@@ -53,12 +56,15 @@ const photosSlice = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
-    toggleFavorite: (state, { payload }: ToggleFavoritesAction) => {
+    updateFavorite: (
+      state,
+      { payload: { id, isFavorite } }: UpdateFavoritesAction
+    ) => {
       state.data = state.data.map((photo) =>
-        photo.id === payload
+        photo.id === id
           ? {
               ...photo,
-              isFavorite: !photo.isFavorite,
+              isFavorite,
             }
           : photo
       );
@@ -66,10 +72,10 @@ const photosSlice = createSlice({
   },
 });
 
-// Two actions generated from the slice
+// actions generated from the slice
 export const {
   fetchPhotosSuccess,
-  toggleFavorite,
+  updateFavorite,
   fetchPhotosStart,
   fetchPhotosError,
 } = photosSlice.actions;
@@ -107,7 +113,7 @@ export const fetchPhotos = (): PhotosThunkAction => {
 export const photosSelector = (state: RootStateT): PhotosT => state.photos;
 
 // Favorites selector which uses reselect (where selector composition is supported)
-export const favoritesSelector = createSelector([photosSelector], (photos) => {
+export const favoritesSelector = createSelector(photosSelector, (photos) => {
   return photos.data.filter((photo) => photo.isFavorite);
 });
 
