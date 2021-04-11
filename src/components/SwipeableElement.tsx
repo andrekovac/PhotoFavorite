@@ -75,6 +75,14 @@ const SwipeableElement = ({
             Extrapolate.CLAMP // handling of input value outside input range
           ),
         },
+        {
+          rotate: `${interpolate(
+            translateX.value,
+            [-threshold * 2, 0, threshold * 2],
+            [-5, 0, 5],
+            Extrapolate.CLAMP
+          )}deg`,
+        },
       ],
     };
   });
