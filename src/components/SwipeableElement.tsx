@@ -4,6 +4,8 @@ import {
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
+  Extrapolate,
+  interpolate,
   runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
@@ -21,8 +23,6 @@ const springConfig = {
   restDisplacementThreshold: 0.001,
   overshootClamping: false,
 };
-
-const log = console.log;
 
 interface SwipeableElementT {
   children: React.ReactElement;
@@ -65,7 +65,17 @@ const SwipeableElement = ({
   // "static" styles should be declared via the standard StyleSheet-API
   const containerStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: translateX.value }],
+      transform: [
+        { translateX: translateX.value },
+        {
+          scale: interpolate(
+            translateX.value, // input value
+            [-threshold, 0, threshold], // input range
+            [0.95, 1, 1.05], // output range
+            Extrapolate.CLAMP // handling of input value outside input range
+          ),
+        },
+      ],
     };
   });
 
