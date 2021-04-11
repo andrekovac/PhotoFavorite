@@ -1,12 +1,12 @@
 import React from 'react';
-import { Alert } from 'react-native';
+import { Alert, useWindowDimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 import useFavorites from '../hooks/redux/useFavorites';
 import Icon from './Icon';
 import SwipeableElement from './SwipeableElement';
 
-const SIZE = 300;
+const MARGIN_HORIZONTAL = 32;
 
 export type ItemT = {
   id: string;
@@ -19,6 +19,8 @@ export type ItemT = {
  * A single image
  */
 const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
+  const { width } = useWindowDimensions();
+  const itemWidth = width - 2 * MARGIN_HORIZONTAL;
   const [_, updateFavorite] = useFavorites();
   const handleSwipeEnd = (direction: 'left' | 'right') => {
     updateFavorite(id, direction === 'right');
@@ -26,7 +28,7 @@ const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
 
   return (
     <SwipeableElement
-      threshold={SIZE / 3}
+      threshold={itemWidth / 3}
       onSwipeEndOverThreshold={handleSwipeEnd}
     >
       <Wrapper
@@ -36,7 +38,7 @@ const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
           });
         }}
       >
-        <Image source={{ uri: download_url }} />
+        <Image source={{ uri: download_url }} size={itemWidth} />
         <FavoriteButton onPress={() => updateFavorite(id, !isFavorite)}>
           <Icon name={isFavorite ? 'md-star' : 'md-star-outline'} />
         </FavoriteButton>
@@ -48,12 +50,12 @@ const Item = ({ id, author, download_url, isFavorite }: ItemT) => {
 export default Item;
 
 const Wrapper = styled.TouchableOpacity`
-  margin: 8px 16px;
+  margin: 8px ${MARGIN_HORIZONTAL}px;
 `;
 
-const Image = styled.Image`
-  width: ${SIZE}px;
-  height: ${SIZE}px;
+const Image = styled.Image<{ size: number }>`
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
 `;
 
 const FavoriteButton = styled.TouchableOpacity`
