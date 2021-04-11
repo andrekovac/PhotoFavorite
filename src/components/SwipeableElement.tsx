@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
-} from "react-native-gesture-handler";
+} from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
 const springConfig = {
   // check https://reactnative.dev/docs/animated#spring
@@ -27,15 +27,17 @@ const log = console.log;
 interface SwipeableElementT {
   children: React.ReactElement;
   threshold: number;
-  onSwipeEndOverThreshold: (direction: "right" | "left") => void;
+  onSwipeEndOverThreshold: (direction: 'right' | 'left') => void;
 }
 const SwipeableElement = ({
   children,
   threshold,
   onSwipeEndOverThreshold,
 }: SwipeableElementT) => {
+  // shared value holding current translation
   const translateX = useSharedValue(0);
 
+  // create event-handler for the respective gesture states
   const panHandler = useAnimatedGestureHandler<
     PanGestureHandlerGestureEvent,
     { x: number }
@@ -45,19 +47,22 @@ const SwipeableElement = ({
       ctx.x = translateX.value;
     },
     onActive: (event, ctx) => {
-      // apply the offset if not yet 0
+      // apply the offset if gesture got interrrupted and started again while not yet back at 0
       translateX.value = ctx.x + event.translationX;
     },
     onEnd: () => {
       if (translateX.value > threshold) {
-        runOnJS(onSwipeEndOverThreshold)("right");
+        // execute callback `onSwipeEndOverThreshold` with `"right"` as argument
+        runOnJS(onSwipeEndOverThreshold)('right');
       } else if (translateX.value < -threshold) {
-        runOnJS(onSwipeEndOverThreshold)("left");
+        runOnJS(onSwipeEndOverThreshold)('left');
       }
       translateX.value = withSpring(0, springConfig);
     },
   });
 
+  // compute animated style based on the current value of the transition;
+  // "static" styles should be declared via the standard StyleSheet-API
   const containerStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: translateX.value }],
