@@ -11,7 +11,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  withTiming,
 } from 'react-native-reanimated';
 
 const springConfig = {
@@ -71,14 +70,6 @@ const SwipeableElement = ({
     return {
       transform: [
         { translateX: translateX.value },
-        {
-          scale: interpolate(
-            translateX.value, // input value
-            [-threshold, 0, threshold], // input range
-            [0.95, 1, 1.05], // output range
-            Extrapolate.CLAMP // handling of input value outside input range
-          ),
-        },
         {
           rotate: `${interpolate(
             translateX.value,
