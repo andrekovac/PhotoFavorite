@@ -11,6 +11,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 
 const springConfig = {
@@ -47,7 +48,7 @@ const SwipeableElement = ({
       ctx.x = translateX.value;
     },
     onActive: (event, ctx) => {
-      // apply the offset if gesture got interrrupted and started again while not yet back at 0
+      // apply the offset if gesture got interupted and started again while not yet back at 0
       translateX.value = ctx.x + event.translationX;
     },
     onEnd: () => {
@@ -57,6 +58,9 @@ const SwipeableElement = ({
       } else if (translateX.value < -threshold) {
         runOnJS(onSwipeEndOverThreshold)('left');
       }
+      // the next line triggers the actual animation of the component including `translateX` in its style declaration
+      // translateX.value = 0;
+      // translateX.value = withTiming(0);
       translateX.value = withSpring(0, springConfig);
     },
   });
