@@ -41,3 +41,7 @@ Switch to the following branches for different state management implementations 
   - `src/api/photos.ts` contains an async function to fetch photos which is used inside the saga.
   - `redux-saga` uses [JavaScript generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) (`function*`) and has some handy "effects" like `put` (dispatches a Redux action) or `call` (calls anything - a JS function, Promise or generator)
   - Redux saga is very powerful in implementing sophisticated asynchronous logic where execution of actions is dependent on others. The `takeLatest` effect (listens for a dispatched action) is used inside `src/store/saga.ts`.
+
+## Animations with react-native-reanimated@2
+
+- `animations-rn2`: Shows how to implement a swipe gesture to add an image to the list favorites or to remove one from it. See the component `SwipeableElement` for the actual implementation.
