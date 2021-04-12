@@ -73,10 +73,10 @@ const SwipeableElement = ({
         { translateX: translateX.value },
         {
           rotate: `${interpolate(
-            translateX.value,
-            [-threshold * 2, 0, threshold * 2],
-            [-5, 0, 5],
-            Extrapolate.CLAMP
+            translateX.value, // input value
+            [-threshold * 2, 0, threshold * 2], // input range
+            [-5, 0, 5], // output range
+            Extrapolate.CLAMP // handling of input value outside input range
           )}deg`,
         },
       ],
