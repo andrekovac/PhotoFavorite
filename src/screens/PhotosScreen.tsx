@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components/native";
 
-import usePhotos from '../hooks/redux/usePhotos';
+import usePhotos from "../hooks/redux/usePhotos";
 import PhotoList from "../components/PhotoList";
 
 const PhotosScreen = () => {
-  const { data, isLoading } = usePhotos();
+  const [{ data, isLoading }, fetchPhotos] = usePhotos();
+
+  useEffect(() => {
+    fetchPhotos();
+  }, []);
 
   return (
-    <>
-      <ListWrapper>
-        <PhotoList data={data} isLoading={isLoading} />
-      </ListWrapper>
-    </>
+    <ListWrapper>
+      <PhotoList
+        data={data}
+        isLoading={isLoading}
+        onRefresh={fetchPhotos}
+        refreshing={isLoading}
+      />
+    </ListWrapper>
   );
 };
 
