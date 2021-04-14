@@ -6,7 +6,7 @@ export type RootStackParamList = {
 export type BottomTabParamList = {
   Photos: undefined;
   Favorites: undefined;
-  Counter: undefined;
+  Camera: undefined;
 };
 
 export type TabOneParamList = {

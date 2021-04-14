@@ -53,6 +53,9 @@ const photosSlice = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
+    addPhoto: (state, { payload }) => {
+      state.data = [payload, ...state.data];
+    },
     toggleFavorite: (state, { payload }: ToggleFavoritesAction) => {
       state.data = state.data.map((photo) =>
         photo.id === payload
@@ -72,6 +75,7 @@ export const {
   toggleFavorite,
   fetchPhotosStart,
   fetchPhotosError,
+  addPhoto,
 } = photosSlice.actions;
 
 const fetchData = async (): Promise<PhotosDataT> => {
