@@ -73,7 +73,19 @@ const CameraScreen = () => {
         type={type}
         ref={cameraRef}
       >
-        <CameraInner />
+        <CameraInner>
+          <FlipButton
+            onPress={() => {
+              setType(
+                type === Camera.Constants.Type.back
+                  ? Camera.Constants.Type.front
+                  : Camera.Constants.Type.back
+              );
+            }}
+          >
+            <FlipButtonText>Flip</FlipButtonText>
+          </FlipButton>
+        </CameraInner>
         <TakeButton onPress={handlePhotoTake} />
       </Camera>
     </Container>
@@ -97,6 +109,19 @@ const TakeButton = styled.TouchableOpacity`
   height: 80px;
   border-radius: 40px;
   margin-bottom: 20px;
+`;
+
+const FlipButton = styled.TouchableOpacity`
+  flex: 0.1;
+  align-self: flex-end;
+  align-items: center;
+`;
+
+const FlipButtonText = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
 `;
 
 export default CameraScreen;
