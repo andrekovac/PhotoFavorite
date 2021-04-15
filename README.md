@@ -32,6 +32,7 @@ An app to learn React Native. Used at [André Kovac](https://www.andrekovac.com/
 
 ### Education
 
-This App is progressively built by people who learn React Native. Read more about what you'll learn:
+- In my React Native workshops students solve tasks related to this app and build it step by step.
+- Read more about a few things you'll learn when taking part:
 
 - [Overview of branches which teach different concepts of React + React Native](./docs/notable-branches.md)
