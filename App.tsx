@@ -6,13 +6,13 @@ import useCachedResources from "./src/hooks/useCachedResources";
 import useColorScheme from "./src/hooks/useColorScheme";
 import Navigation from "./src/navigation";
 
-import { CounterContext } from "./src/context";
+import { CounterContext } from "./src/context/counterContext";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number>(0);
 
   const counter = {
     count: count,
