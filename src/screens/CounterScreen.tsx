@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 
-import { CounterContext } from "../context";
+import { CounterContext, CounterContextT } from "../context/counterContext";
 
 const CounterScreen = () => {
-  const { count, increment, decrement, reset } = useContext(CounterContext);
+  const { count, increment, decrement, reset } = useContext<CounterContextT>(CounterContext);
 
   return (
     <Container>
