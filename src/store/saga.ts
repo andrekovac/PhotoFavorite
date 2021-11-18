@@ -19,6 +19,10 @@ import { increment, decrement, reset } from "../store/slices/counter";
 
 import { fetchPhotos } from "../api/photos";
 
+// ------
+// Photos
+// ------
+
 // Worker Saga: Will be fired when fetchPhotosStart action is dispatched
 function* fetchData() {
   try {
@@ -33,6 +37,10 @@ function* fetchData() {
 function* fetchSaga() {
   yield takeLatest(fetchPhotosStart.type, fetchData);
 }
+
+// ------------
+// Numbers game
+// ------------
 
 function* countTill20() {
   let count = yield select((state) => state.count);
@@ -50,6 +58,7 @@ function* numbersSaga() {
   while (true) {
     yield take(reset.type);
 
+    // A race between the `countTill20` generator function and a decrement type
     const { cancel } = yield race({
       task: call(countTill20),
       cancel: take(decrement.type),
