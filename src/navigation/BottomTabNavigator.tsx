@@ -9,7 +9,7 @@ import PhotosScreen from '../screens/PhotosScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import CounterScreen from '../screens/CounterScreen';
 
-import { CounterContext } from '../context';
+import { CounterContext, CounterContextT } from '../context/counterContext';
 
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
@@ -17,7 +17,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  const { count } = useContext(CounterContext);
+  const { count } = useContext<CounterContextT>(CounterContext);
 
   return (
     <BottomTab.Navigator
